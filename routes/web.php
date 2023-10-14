@@ -27,7 +27,7 @@ require __DIR__ . '/admin.php';
 // Auth::routes();
 
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
+Route::post('/register', [RegisterController::class, 'postRegistration'])->name('register.post');
 
 Route::get('dashboard',[DashboardController::class, 'index'])->name('dashboard');
 

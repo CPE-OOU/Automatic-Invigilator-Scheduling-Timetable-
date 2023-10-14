@@ -8,7 +8,7 @@
 
 @section('content')
 <section class="fxt-template-animation fxt-template-layout34" data-bg-image="img/elements/bg1.png">
-    <div class="fxt-shape">
+    <div class="fxt-shape  d-none d-md-block">
         <div class="fxt-transformX-L-50 fxt-transition-delay-1">
             <img src="img/elements/shape1.png" alt="Shape">
         </div>
@@ -42,29 +42,32 @@
                             @csrf
                             <div class="form-group">
                                 <input type="text" id="department" class="form-control" name="department" placeholder="Department" required="required" value="">
-                                @error('department')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                @if ($errors->has('department'))
+                                      <span class="text-danger">{{ $errors->first('department') }}</span>
+                                  @endif
                             </div>
                             <div class="form-group">
                                 <input type="text" id="faculty" class="form-control" name="faculty" placeholder="Faculty" required="required" value="">
-                                @error('faculty')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                 @if ($errors->has('faculty'))
+                                      <span class="text-danger">{{ $errors->first('faculty') }}</span>
+                                  @endif
                             </div>
                             <div class="form-group">
                                 <input type="email" id="email" class="form-control" name="email" placeholder="E-mail Address" required="required" value="">
-                                @error('email')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                               @if ($errors->has('email'))
+                                      <span class="text-danger">{{ $errors->first('email') }}</span>
+                                  @endif
                             </div>
                             <div class="form-group">
                                 <input id="password" type="password" class="form-control" name="password" placeholder="********" required="required">
                                 <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
+                                 @if ($errors->has('password'))
+                                      <span class="text-danger">{{ $errors->first('password') }}</span>
+                                  @endif
                             </div>
                             <div class="form-group">
                                 <div class="fxt-checkbox-box">
-                                    <input id="checkbox1" type="checkbox">
+                                    <input id="checkbox1" type="checkbox" name="remember">
                                     <label for="checkbox1" class="ps-4">I agree with <a class="terms-link" href="{{ route('terms') }}">Terms</a> and <a class="terms-link" href="{{ route('privacy') }}">Privacy Policy</a></label>
                                 </div>
                             </div>

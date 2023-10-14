@@ -3,20 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-//    public function index()
-//     {
-//         return view('user.dashboard');
-//     }
-// }
-
-public function index()
+    public function index()
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             return view('user.dashboard');
         }
-  
-        return redirect("login")->withSuccess('You are not allowed to access');
+
+        return redirect("login")->with('error', 'You are not allowed to access.'); // You can use 'with' to display an error message
     }
+}

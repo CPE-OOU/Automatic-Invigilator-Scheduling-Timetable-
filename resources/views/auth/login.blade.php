@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="fxt-template-animation fxt-template-layout34" data-bg-image="{{ asset('img/elements/bg1.png') }}">
-    <div class="fxt-shape">
+    <div class="fxt-shape  d-none d-md-block">
         <div class="fxt-transformX-L-50 fxt-transition-delay-1">
             <img src="{{ asset('img/elements/shape1.png') }}" alt="Shape">
         </div>
@@ -18,7 +18,7 @@
             </div>
 
                     <div class="fxt-transformX-L-50 fxt-transition-delay-3">
-                        <a href="{{ route('home') }}" class="fxt-logo"><img src="{{ asset('images/logo.png') }}" alt="Logo"></a>
+                        <a href="{{ route('/') }}" class="fxt-logo"><img src="{{ asset('images/logo.png') }}" alt="Logo"></a>
                     </div>
                     <div class="fxt-transformX-L-50 fxt-transition-delay-5">
                         <div class="fxt-middle-content">
@@ -32,7 +32,7 @@
            <div class="col-lg-4">
                 <div class="fxt-column-wrap justify-content-center">
                     <div class="fxt-form">
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('login.post') }}">
 @csrf
 <div class="form-group">
 <input type="email" id="email" class="form-control" name="email" placeholder="Enter Email" required>

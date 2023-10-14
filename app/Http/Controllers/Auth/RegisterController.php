@@ -37,7 +37,7 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    
+
     public function showRegistrationForm()
     {
         return view('auth.register');
@@ -57,6 +57,22 @@ class RegisterController extends Controller
         Auth::login($user);
         
         return redirect()->route('dashboard')->with('success', 'Welcome in!');
+    }
+
+
+     public function postRegistration(Request $request)
+    {  
+        $request->validate([
+            'department' => 'required',
+            'faculty' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+        ]);
+           
+        $data = $request->all();
+        $check = $this->create($data);
+         
+        return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
     }
 
     
