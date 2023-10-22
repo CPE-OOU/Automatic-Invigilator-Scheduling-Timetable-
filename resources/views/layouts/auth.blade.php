@@ -6,20 +6,20 @@
     <title>Invig | Invigilation Scheduling Software</title>
     <meta name="description" content="">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="/public/img/favicon.png">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="{{ asset('css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="/css/fontawesome-all.min.css">
     <!-- Flaticon CSS -->
-    <link rel="stylesheet" href="{{ asset('font/flaticon.css') }}">
+    <link rel="stylesheet" href="/public/font/flaticon.css">
     <!-- Google Web Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <div class="">
@@ -35,14 +35,14 @@
         </div>
     </div> -->
 
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="/js/jquery.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="js/bootstrap.min.js"></script>
     <!-- Imagesloaded js -->
-    <script src="{{ asset('js/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
     <!-- Validator js -->
-    <script src="{{ asset('js/validator.min.js') }}"></script>
+    <script src="js/validator.min.js"></script>
     <!-- Custom Js -->
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

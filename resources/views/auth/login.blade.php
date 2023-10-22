@@ -18,7 +18,7 @@
             </div>
 
                     <div class="fxt-transformX-L-50 fxt-transition-delay-3">
-                        <a href="{{ route('/') }}" class="fxt-logo"><img src="{{ asset('images/logo.png') }}" alt="Logo"></a>
+                        <a href="/" class="fxt-logo"><img src="{{ asset('images/logo.png') }}" alt="Logo"></a>
                     </div>
                     <div class="fxt-transformX-L-50 fxt-transition-delay-5">
                         <div class="fxt-middle-content">
@@ -33,29 +33,35 @@
                 <div class="fxt-column-wrap justify-content-center">
                     <div class="fxt-form">
     <form method="POST" action="{{ route('login.post') }}">
-@csrf
-<div class="form-group">
-<input type="email" id="email" class="form-control" name="email" placeholder="Enter Email" required>
-@error('email')
-<span class="text-danger">{{ $message }}</span>
-@enderror
-</div>
-<div class="form-group">
-<input id="password" type="password" class="form-control" name="password" placeholder="********" required>
-<i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
-@error('password')
-<span class="text-danger">{{ $message }}</span>
-@enderror
-</div>
-<div class="form-group">
-<div class="fxt-switcher-description2 text-right">
-<a href="{{ route('password.request') }}" class="fxt-switcher-text">Recover Password</a>
-</div>
-</div>
-<div class="form-group">
-<button type="submit" class="fxt-btn-fill">Sign In</button>
-</div>
-</form>
+    @csrf
+        <div class="form-group">
+        <input type="department" id="email" class="form-control" name="department" placeholder="Enter Department" required>
+        @error('department')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+        </div>
+        <div class="form-group">
+        <input type="email" id="email" class="form-control" name="email" placeholder="Enter Email" required>
+        @error('email')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+        </div>
+        <div class="form-group">
+        <input id="password" type="password" class="form-control" name="password" placeholder="********" required>
+        <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
+        @error('password')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+        </div>
+        <div class="form-group">
+        <div class="fxt-switcher-description2 text-right">
+        <a href="{{ route('password.request') }}" class="fxt-switcher-text">Recover Password</a>
+        </div>
+        </div>
+        <div class="form-group">
+        <button type="submit" class="fxt-btn-fill">Sign In</button>
+        </div>
+        </form>
 
                     </div>
                     <div class="fxt-style-line">

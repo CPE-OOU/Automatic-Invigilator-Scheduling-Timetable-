@@ -9,21 +9,21 @@
     <title>Invig | Invigilation Scheduling Software</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ asset('plugins/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/plugins/bootstrap/bootstrap.min.css') }}">
     <!-- themefy-icon -->
-    <link rel="stylesheet" href="{{ asset('plugins/themify-icons/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/plugins/themify-icons/themify-icons.css') }}">
     <!-- slick slider -->
-    <link rel="stylesheet" href="{{ asset('plugins/slick/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/plugins/slick/slick.css') }}">
     <!-- venobox popup -->
-    <link rel="stylesheet" href="{{ asset('plugins/Venobox/venobox.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/plugins/Venobox/venobox.css') }}">
     <!-- aos -->
-    <link rel="stylesheet" href="{{ asset('plugins/aos/aos.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/plugins/aos/aos.css') }}">
     <!-- Main Stylesheet -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
-    <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('public/images/favicon.ico') }}" type="image/x-icon">
 </head>
 
 <body>
@@ -36,17 +36,17 @@
 
 
       <!-- jQuery -->
-    <script src="{{ asset('plugins/jQuery/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/plugins/jQuery/jquery.min.js') }}"></script>
     <!-- Bootstrap JS -->
-    <script src="{{ asset('plugins/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('public/plugins/bootstrap/bootstrap.min.js') }}"></script>
     <!-- slick slider -->
-    <script src="{{ asset('plugins/slick/slick.min.js') }}"></script>
+    <script src="{{ asset('public/plugins/slick/slick.min.js') }}"></script>
     <!-- venobox -->
-    <script src="{{ asset('plugins/Venobox/venobox.min.js') }}"></script>
+    <script src="{{ asset('public/plugins/Venobox/venobox.min.js') }}"></script>
     <!-- aos -->
-    <script src="{{ asset('plugins/aos/aos.js') }}"></script>
+    <script src="{{ asset('public/plugins/aos/aos.js') }}"></script>
     <!-- Main Script -->
-    <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('public/js/script.js') }}"></script>
 </body>
 
 

@@ -5,7 +5,7 @@
 <section class="fixed-top navigation">
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="/"><img src="images/logo.png" alt="logo"></a>
+      <a class="navbar-brand" href="/"><img src="public/images/logo.png" alt="logo"></a>
       <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -43,7 +43,7 @@
 <!-- /navigation -->
 
 <!-- hero area -->
-<section class="hero-section hero" data-background="" style="background-image: url(images/hero-area/banner-bg.png);">
+<section class="hero-section hero" data-background="" style="background-image: url(public/images/hero-area/banner-bg.png);">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center zindex-1">
@@ -53,21 +53,21 @@
           dolore eu fugiat nulla pariatur.</p>
         <a href="#" class="btn btn-secondary btn-lg">explore us</a>
         <!-- banner image -->
-        <img class="img-fluid w-100 banner-image" src="images/hero-area/banner-img.png" alt="banner-img">
+        <img class="img-fluid w-100 banner-image" src="public/images/hero-area/banner-img.png" alt="banner-img">
       </div>
     </div>
   </div>
   <!-- background shapes -->
   <div id="scene">
-    <img class="img-fluid hero-bg-1 up-down-animation" src="images/background-shape/feature-bg-2.png" alt="">
-    <img class="img-fluid hero-bg-2 left-right-animation" src="images/background-shape/seo-ball-1.png" alt="">
-    <img class="img-fluid hero-bg-3 left-right-animation" src="images/background-shape/seo-half-cycle.png" alt="">
-    <img class="img-fluid hero-bg-4 up-down-animation" src="images/background-shape/green-dot.png" alt="">
-    <img class="img-fluid hero-bg-5 left-right-animation" src="images/background-shape/blue-half-cycle.png" alt="">
-    <img class="img-fluid hero-bg-6 up-down-animation" src="images/background-shape/seo-ball-1.png" alt="">
-    <img class="img-fluid hero-bg-7 left-right-animation" src="images/background-shape/yellow-triangle.png" alt="">
-    <img class="img-fluid hero-bg-8 up-down-animation" src="images/background-shape/service-half-cycle.png" alt="">
-    <img class="img-fluid hero-bg-9 up-down-animation" src="images/background-shape/team-bg-triangle.png" alt="">
+    <img class="img-fluid hero-bg-1 up-down-animation" src="public/images/background-shape/feature-bg-2.png" alt="">
+    <img class="img-fluid hero-bg-2 left-right-animation" src="public/images/background-shape/seo-ball-1.png" alt="">
+    <img class="img-fluid hero-bg-3 left-right-animation" src="public/images/background-shape/seo-half-cycle.png" alt="">
+    <img class="img-fluid hero-bg-4 up-down-animation" src="public/images/background-shape/green-dot.png" alt="">
+    <img class="img-fluid hero-bg-5 left-right-animation" src="public/images/background-shape/blue-half-cycle.png" alt="">
+    <img class="img-fluid hero-bg-6 up-down-animation" src="public/images/background-shape/seo-ball-1.png" alt="">
+    <img class="img-fluid hero-bg-7 left-right-animation" src="public/images/background-shape/yellow-triangle.png" alt="">
+    <img class="img-fluid hero-bg-8 up-down-animation" src="public/images/background-shape/service-half-cycle.png" alt="">
+    <img class="img-fluid hero-bg-9 up-down-animation" src="public/images/background-shape/team-bg-triangle.png" alt="">
   </div>
 </section>
 <!-- /hero-area -->
@@ -134,8 +134,8 @@
       </div>
     </div>
   </div>
-  <img class="feature-bg-1 up-down-animation" src="images/background-shape/feature-bg-1.png" alt="bg-shape">
-  <img class="feature-bg-2 left-right-animation" src="images/background-shape/feature-bg-2.png" alt="bg-shape">
+  <img class="feature-bg-1 up-down-animation" src="public/images/background-shape/feature-bg-1.png" alt="bg-shape">
+  <img class="feature-bg-2 left-right-animation" src="public/images/background-shape/feature-bg-2.png" alt="bg-shape">
 </section>
 <!-- /feature -->
 
@@ -145,7 +145,7 @@
     <div class="row">
       <div class="col-md-6">
         <div class="seo-image">
-          <img class="img-fluid" src="images/marketing/marketing.png" alt="form-img">
+          <img class="img-fluid" src="public/images/marketing/marketing.png" alt="form-img">
         </div>
       </div>
       <div class="col-md-5">

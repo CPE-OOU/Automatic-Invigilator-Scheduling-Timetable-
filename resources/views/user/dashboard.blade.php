@@ -1,7 +1,8 @@
+@section('styles')
 @extends('layouts.guest')
 @include('user.sidebar')
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg">
-@include('user.top')
+@include('user.topmenu')
 
     @yield('content')
 
@@ -16,7 +17,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Restaurants</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    {{ number_format($rest_count) }}
+                                    {{-- {{ number_format($rest_count) }} --}}
 
                                 </h5>
                             </div>
@@ -38,14 +39,10 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Users</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    {{ number_format($usernumber) }}
+                                    {{-- {{ number_format($usernumber) }}
                                     @if ($percentage_change !== 0)
-            @if ($percentage_change > 0)
-                <span class="text-success text-sm font-weight-bolder">+{{ number_format($percentage_change, 2) }}%</span>
-            @else
-                <span class="text-danger text-sm font-weight-bolder">{{ number_format($percentage_change, 2) }}%</span>
-            @endif
-        @endif
+            
+        @endif --}}
                                 </h5>
                             </div>
                         </div>
@@ -111,8 +108,7 @@
                         <div class="col-lg-6">
                             <div class="d-flex flex-column h-100">
                                 <p class="mb-1 pt-2 text-bold">Today is another day</p>
-                                <h5 class="font-weight-bolder">Welcome, {{ Auth('admin')->User()->firstName }}
-                                    {{ Auth('admin')->User()->lastName }}!</h5>
+                                <h5 class="font-weight-bolder">Welcome, !</h5>
                                 <p class="mb-5">Your journey begins here, where you'll shape dreams into reality. Let's explore the realms of creativity and innovation together!</p>
                                 <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
                                     Read More
@@ -839,3 +835,4 @@
         <script async defer src="https://buttons.github.io/buttons.js"></script>
         <script src="temp/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
         <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854" integrity="sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==" data-cf-beacon='{"rayId":"7f321bd77ca7b95a","version":"2023.7.0","r":1,"token":"1b7cbb72744b40c580f8633c6b62637e","si":100}' crossorigin="anonymous"></script>
+@endsection
