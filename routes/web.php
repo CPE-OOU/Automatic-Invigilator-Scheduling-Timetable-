@@ -39,6 +39,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/generate-timetable', [FacultyController::class, 'generateTimetable'])->name('generate.timetable');
 });
 
+Route::get('/timetable-generated', function () {
+  return view('timetable-generated');
+})->name('timetable.generated');
+
 
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'postRegistration'])->name('register.post');
