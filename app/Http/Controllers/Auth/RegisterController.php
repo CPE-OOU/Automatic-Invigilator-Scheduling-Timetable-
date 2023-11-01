@@ -46,8 +46,8 @@ class RegisterController extends Controller
     public function register(Request $request)
     {  
         $request->validate([
-            'department' => ['required', 'string', 'max:255'],
-            'faculty' => ['required', 'string', 'max:255'],
+            'department_id' => ['required', 'string', 'max:255'],
+            'faculty_id' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
@@ -63,8 +63,8 @@ class RegisterController extends Controller
      public function postRegistration(Request $request)
     {  
         $request->validate([
-            'department' => 'required',
-            'faculty' => 'required',
+            'department_id' => 'required',
+            'faculty_id' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
         ]);
@@ -79,8 +79,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'department' => ['required', 'string', 'max:255'],
-            'faculty' => ['required', 'string', 'max:255'],
+            'department_id' => ['required', 'string', 'max:255'],
+            'faculty_id' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -90,8 +90,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'department' => $data['department'],
-            'faculty' => $data['faculty'],
+            'department_id' => $data['department_id'],
+            'faculty_id' => $data['faculty_id'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

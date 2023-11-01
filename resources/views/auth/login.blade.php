@@ -35,7 +35,7 @@
     <form method="POST" action="{{ route('login.post') }}">
     @csrf
         <div class="form-group">
-        <input type="department" id="email" class="form-control" name="department" placeholder="Enter Department" required>
+        <input type="department" id="email" class="form-control" name="department_id" placeholder="Enter Department" required>
         @error('department')
         <span class="text-danger">{{ $message }}</span>
         @enderror
