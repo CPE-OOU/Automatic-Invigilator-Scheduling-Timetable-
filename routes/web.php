@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Settings;
+use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepartmentController;
@@ -31,6 +32,13 @@ require __DIR__ . '/admin.php';
 
 
 // Auth::routes();
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/generate-timetable', [FacultyController::class, 'generateTimetable'])->name('generate.timetable');
+});
+
 
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'postRegistration'])->name('register.post');
