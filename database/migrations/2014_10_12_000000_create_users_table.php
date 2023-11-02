@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+//return new class extends Migration
+class CreateUsersTable extends Migration
 {
     public function up(): void
     {
@@ -27,39 +28,11 @@ return new class extends Migration
             $table->foreign('invigilator_id')->references('id')->on('lecturers');
         });
 
-        Schema::create('departments', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
-        });
-
-        Schema::create('faculties', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
-        });
-
-        // Update the existing users to populate the department and faculty tables
-        $users = \App\User::all();
-        foreach ($users as $user) {
-            $department = new \App\Department();
-            $department->name = $user->department;
-            $department->save();
-
-            $faculty = new \App\Faculty();
-            $faculty->name = $user->faculty;
-            $faculty->save();
-
-            $user->department_id = $department->id;
-            $user->faculty_id = $faculty->id;
-            $user->save();
-        }
-    }
+    }  
+        
 
     public function down(): void
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('departments');
-        Schema::dropIfExists('faculties');
     }
-};
+}
