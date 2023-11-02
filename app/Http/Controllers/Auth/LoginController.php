@@ -23,12 +23,12 @@ class LoginController extends Controller
     public function postLogin(Request $request)
     {
         $request->validate([
-            'department_id' => 'required',
+            'department' => 'required',
             'email' => 'required',
             'password' => 'required',
         ]);
    
-        $credentials = $request->only('email', 'department_id', 'password');
+        $credentials = $request->only('email', 'department', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended('dashboard')
                         ->withSuccess('You have Successfully loggedin');

@@ -45,7 +45,7 @@ Route::get('/timetable-generated', function () {
 
 
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'postRegistration'])->name('register.post');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.post');
 
 Route::get('dashboard',[DashboardController::class, 'index'])->name('dashboard');
 

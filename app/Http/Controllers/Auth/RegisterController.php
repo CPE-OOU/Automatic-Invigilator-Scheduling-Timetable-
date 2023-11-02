@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use App\Models\Department; // Import the Department model
+use App\Models\Department;
 use App\Models\Faculty;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -62,7 +62,7 @@ class RegisterController extends Controller
     }
 
 
-     public function postRegistration(Request $request)
+     public function store(Request $request)
     {  
         $request->validate([
             'department' => 'required',
@@ -70,7 +70,7 @@ class RegisterController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
         ]);
-           
+            
         $data = $request->all();
         $check = $this->create($data);
          
