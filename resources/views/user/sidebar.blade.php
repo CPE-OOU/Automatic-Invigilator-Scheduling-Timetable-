@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link {{ (Request::is('/dashboard') ? 'active' : '') }}" href="{{ route('dashboard') }}">
+          <a class="nav-link {{ (Request::is('dashboard') ? 'active' : '') }}" href="{{ route('dashboard') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>shop </title>
@@ -32,7 +32,7 @@
         </li>
         
         <li class="nav-item">
-          <a class="nav-link {{ (Request::is('/department/lecturers') ? 'active' : '') }}" href="{{ route('lecturers.index') }}">
+          <a class="nav-link {{ (Request::is('lecturers') ? 'active' : '') }}" href="{{ route('lecturers.index') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <title>Lecturers Management</title>
@@ -53,19 +53,19 @@
           </a>
         </li>
         <li class="nav-item pb-2">
-          <a class="nav-link " href="">
+          <a class="nav-link {{ (Request::is('courses') ? 'active' : '') }} " href="{{ route('courses.index') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                  <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('user-management') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
+                  <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('/department/courses') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
               </div>
-              <span class="nav-link-text ms-1">Manage Restaurants</span>
+              <span class="nav-link-text ms-1">Manage Courses</span>
           </a>
         </li> 
-        
+         
         <li class="nav-item">
-          <a class="nav-link " href="">
+          <a class="nav-link {{ (Request::is('timetable') ? 'active' : '') }}" href="{{ route('timetable.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <title>Frontend Settings</title>
+                <title>Timetable</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
                     <g transform="translate(1716.000000, 291.000000)">
@@ -78,7 +78,7 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Frontend Settings</span>
+            <span class="nav-link-text ms-1">Timetable</span>
           </a>
         </li>
              

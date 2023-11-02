@@ -68,4 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
   // Examination Venue Routes
   Route::resource('venues', ExaminationVenueController::class);
 
+    // Timetable Routes
+    Route::resource('timetable', FacultyController::class);
+
 });

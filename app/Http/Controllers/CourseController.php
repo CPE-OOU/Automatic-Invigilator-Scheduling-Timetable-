@@ -16,7 +16,7 @@ class CourseController extends Controller
     {
         $courses = Course::all();
 
-        return view('courses.index', compact('courses'));
+        return view('user.courses', compact('courses'));
     }
 
     /**
@@ -40,7 +40,9 @@ class CourseController extends Controller
         $request->validate([
             'name' => 'required',
             'code' => 'required|unique:courses',
-            'credit_hours' => 'required|numeric',
+            'credit_hours' => 'nullable|numeric',
+            'lecturers' => 'required'
+
         ]);
 
         Course::create($request->all());
@@ -88,7 +90,7 @@ class CourseController extends Controller
 
         $course->update($request->all());
 
-        return redirect()->route('courses.index')
+        return redirect()->route('user.course')
                         ->with('success','Course updated successfully.');
     }
 

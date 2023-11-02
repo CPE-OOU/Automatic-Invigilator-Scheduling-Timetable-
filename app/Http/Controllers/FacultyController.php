@@ -4,11 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\User;
+use App\Models\Faculty;
 use Illuminate\Http\Request;
 use PDF;
 
 class FacultyController extends Controller
 {
+
+
+    public function index()
+    {
+        // $timetables = Timetable::all();
+
+        return view('user.timetable');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'code' => 'required|unique:departments',
+            'hod_id' => 'required|exists:lecturers,id',
+        ]);
+    }
+
     public function generateTimetable(Request $request)
     {
         // Get the selected deadline for exams
@@ -37,8 +56,8 @@ class FacultyController extends Controller
             // Generate exam date within the selected deadline
             $examDate = $this->generateExamDate($deadline);
 
-            // Generate exam time between 8am and 6pm, and ensure that the duration is within 3 hours
-            list($examTime, $examDuration) = $this->generateExamTime();
+            // Generate exam time between 8am and 6pm
+            $examTime = $this->generateExamTime();
 
             // Generate a venue for the exam
             $venue = $this->generateVenue();
@@ -46,7 +65,6 @@ class FacultyController extends Controller
             // Create a timetable entry for the course
             $timetable[] = [
                 'time' => $examTime,
-                'duration' => $examDuration,
                 'course_name' => $course->name,
                 'course_code' => $course->code,
                 'invigilators' => $lecturers->pluck('name')->implode(', '),
@@ -76,7 +94,7 @@ class FacultyController extends Controller
         $date = $today->addDays(rand(1, $days));
 
         // Ensure the generated date falls on a weekday (Monday to Friday)
-        while (!$date->isWeekday()) {
+        while ($date->isWeekend()) {
             $date->addDays(1);
         }
 
@@ -88,17 +106,11 @@ class FacultyController extends Controller
         $startHour = 8; // Exam start time: 8am
         $endHour = 18; // Exam end time: 6pm
 
-        // Calculate the maximum duration for exams (3 hours)
-        $maxDuration = 180; // 3 hours in minutes
-
         // Generate a random time between the given start and end hours
         $hour = rand($startHour, $endHour);
+        $minute = rand(0, 59);
 
-        // Ensure the exam duration does not exceed the maximum
-        $maxMinute = min(60, $maxDuration);
-        $minute = rand(0, $maxMinute);
-
-        return [sprintf('%02d:%02d', $hour, $minute), $maxDuration];
+        return sprintf('%02d:%02d', $hour, $minute);
     }
 
     private function generateVenue()

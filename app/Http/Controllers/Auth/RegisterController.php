@@ -45,34 +45,36 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    public function register(Request $request)
-    {  
-        $request->validate([
-            'department' => ['required', 'string', 'max:255'],
-            'faculty' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-        ]);
+    // public function register(Request $request)
+    // {  
+    //     $request->validate([
+    //         'department' => ['required', 'string', 'max:255'],
+    //         'faculty' => ['required', 'string', 'max:255'],
+    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    //         'password' => ['required', 'string', 'min:6', 'confirmed'],
+    //     ]);
         
-        $user = $this->create($request->all());
+    //     $user = $this->create($request->all());
         
-        Auth::login($user);
+    //     Auth::login($user);
         
-        return redirect()->route('dashboard')->with('success', 'Welcome in!');
-    }
+    //     return redirect()->route('dashboard')->with('success', 'Welcome in!');
+    // }
 
 
      public function store(Request $request)
     {  
         $request->validate([
-            'department' => 'required',
+            'department' => 'required|unique:users',
             'faculty' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
         ]);
             
         $data = $request->all();
-        $check = $this->create($data);
+        $user = $this->create($data);
+
+        Auth::login($user);
          
         return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
     }
@@ -81,7 +83,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'department' => ['required', 'string', 'max:255'],
+            'department' => ['required', 'string', 'max:255', 'unique:users'],
             'faculty' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -99,5 +101,9 @@ class RegisterController extends Controller
         'password' => Hash::make($data['password']),
     ]);
     
+    Auth::login($user);
+         
+    return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
 }
+
 }
