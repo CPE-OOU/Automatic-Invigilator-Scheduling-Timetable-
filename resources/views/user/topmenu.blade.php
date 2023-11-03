@@ -28,15 +28,16 @@
                 </li>
                 <li class="nav-item d-flex align-items-center">
                     <a class="nav-link text-body font-weight-bold" href=""
-                                    onclick="event.preventDefault();
-                                document.getElementById('logoutform').submit();">
-                                    <i class="fa fa-sign-out me-1"></i> Logout
-                                </a>
-                                <form id="logoutform" action="" method="POST"
-                                style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
+                        onclick="event.preventDefault();
+                        document.getElementById('logoutform').submit();">
+                        <i class="fa fa-sign-out me-1"></i> Logout
+                    </a>
+                    <form id="logoutform" action="{{ route('logout') }}" method="POST"
+                        style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                 </li>
+                
                
                 <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">

@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Restaurants</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timetables</p>
                                 <h5 class="font-weight-bolder mb-0">
                                     {{-- {{ number_format($rest_count) }} --}}
 
@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Users</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Courses</p>
                                 <h5 class="font-weight-bolder mb-0">
                                     {{-- {{ number_format($usernumber) }}
                                     @if ($percentage_change !== 0)
@@ -61,7 +61,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Restaurants</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Lecturers</p>
                                 <h5 class="font-weight-bolder mb-0">
                                     +3,462
 <span class="text-danger text-sm font-weight-bolder">-2%</span>
@@ -227,9 +227,9 @@
                                             </g>
                                         </svg>
                                     </div>
-                                    <p class="text-xs mt-1 mb-0 font-weight-bold">Sales</p>
+                                    <p class="text-xs mt-1 mb-0 font-weight-bold">Faculties</p>
                                 </div>
-                                <h4 class="font-weight-bolder">435$</h4>
+                                <h4 class="font-weight-bolder">1</h4>
                                 <div class="progress w-75">
                                     <div class="progress-bar bg-dark w-30" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
@@ -267,7 +267,7 @@
         <div class="col-lg-7">
             <div class="card z-index-2">
                 <div class="card-header pb-0">
-                    <h6>Sales overview</h6>
+                    <h6>Overview</h6>
                     <p class="text-sm">
                         <i class="fa fa-arrow-up text-success"></i>
                         <span class="font-weight-bold">4% more</span>
@@ -289,7 +289,7 @@
                 <div class="card-header pb-0">
                     <div class="row">
                         <div class="col-lg-6 col-7">
-                            <h6>Projects</h6>
+                            <h6>Timetables</h6>
                             <p class="text-sm mb-0">
                                 <i class="fa fa-check text-info" aria-hidden="true"></i>
                                 <span class="font-weight-bold ms-1">30 done</span>
@@ -569,7 +569,7 @@
         <div class="col-lg-4 col-md-6">
             <div class="card h-100">
                 <div class="card-header pb-0">
-                    <h6>Orders overview</h6>
+                    <h6>Overview</h6>
                     <p class="text-sm">
                         <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
                         <span class="font-weight-bold">24%</span>
