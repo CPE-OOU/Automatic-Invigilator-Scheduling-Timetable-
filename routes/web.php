@@ -72,3 +72,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('timetable', FacultyController::class);
 
 });
+
+
+Route::post('/generate-timetable', [FacultyController::class, 'generateTimetable'])->name('generate.timetable');
