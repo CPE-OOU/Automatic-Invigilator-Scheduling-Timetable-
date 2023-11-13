@@ -32,9 +32,7 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             ID
                                         </th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Photo
-                                        </th>
+                                        
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Name
                                         </th>
@@ -58,11 +56,7 @@
                                         <td class="ps-4">
                                             <p class="text-xs font-weight-bold mb-0">{{ $lecturer->id }}</p>
                                         </td>
-                                        <td>
-                                            <div>
-                                                <img src="{{ asset('storage/' . $lecturer->photo) }}" class="avatar avatar-sm me-3">
-                                            </div>
-                                        </td>
+                                        
                                         <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">{{ $lecturer->name }}</p>
                                         </td>
