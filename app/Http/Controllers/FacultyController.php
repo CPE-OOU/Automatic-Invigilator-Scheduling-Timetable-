@@ -19,19 +19,22 @@ class FacultyController extends Controller
         return view('user.timetable');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'code' => 'required|unique:departments',
-            'hod_id' => 'required|exists:lecturers,id',
-        ]);
-    }
-
     public function generateTimetable(Request $request)
     {
+        $request->validate([
+        'start' => 'required|date',
+        'end' => 'required|date|after:start',
+        'venues' => 'required|array',
+        'venues.*' => 'required|string',
+        'timestart' => 'required|date_format:H:i',
+        'timeend' => 'required|date_format:H:i|after:timestart',
+    ]);
+
         // Get the selected deadline for exams
-        $deadline = $request->input('deadline');
+        $startDate = $request->input('start');
+        $endDate = $request->input('end');
+        $venues = $request->input('venues');
+        $deadline = $endDate; // Use the end date as the deadline
 
         // Fetch all courses
         $courses = Course::all();
@@ -54,13 +57,13 @@ class FacultyController extends Controller
             $lecturers[] = $thirdLecturer;
 
             // Generate exam date within the selected deadline
-            $examDate = $this->generateExamDate($deadline);
+            $examDate = $this->generateExamDate($startDate, $endDate);
 
-            // Generate exam time between 8am and 6pm
-            $examTime = $this->generateExamTime();
+            // Generate exam time between the selected start and end time
+            $examTime = $this->generateExamTime($request->input('timestart'), $request->input('timeend'));
 
             // Generate a venue for the exam
-            $venue = $this->generateVenue();
+            $venue = $request->input('venue');
 
             // Create a timetable entry for the course
             $timetable[] = [
@@ -80,45 +83,37 @@ class FacultyController extends Controller
         $pdf->save('timetable.pdf');
 
         // Return a response indicating success
-        return response()->json(['message' => 'Timetable generated successfully']);
+        return redirect("dashboard")->withSuccess('Timetable generated successfully');
     }
 
-    private function generateExamDate($deadline)
+    private function generateExamDate($startDate, $endDate)
     {
-        $today = now();
+        $startTimestamp = strtotime($startDate);
+        $endTimestamp = strtotime($endDate);
 
-        // Calculate the number of days between today and the deadline
-        $days = $today->diffInDays($deadline);
+        // Calculate the number of days between the start and end date
+        $days = ($endTimestamp - $startTimestamp) / (60 * 60 * 24);
 
-        // Generate a random date within the selected deadline
-        $date = $today->addDays(rand(1, $days));
+        // Generate a random date within the selected start and end date
+        $date = date('Y-m-d', strtotime("+$days days", $startTimestamp));
 
         // Ensure the generated date falls on a weekday (Monday to Friday)
-        while ($date->isWeekend()) {
-            $date->addDays(1);
+        while (date('N', strtotime($date)) >= 6) {
+            $date = date('Y-m-d', strtotime("+1 day", strtotime($date)));
         }
 
-        return $date->format('Y-m-d');
+        return $date;
     }
 
-    private function generateExamTime()
+    private function generateExamTime($startTime, $endTime)
     {
-        $startHour = 8; // Exam start time: 8am
-        $endHour = 18; // Exam end time: 6pm
+        // Generate a random time between the given start and end time
+        $startTimestamp = strtotime($startTime);
+        $endTimestamp = strtotime($endTime);
 
-        // Generate a random time between the given start and end hours
-        $hour = rand($startHour, $endHour);
-        $minute = rand(0, 59);
+        $timestamp = rand($startTimestamp, $endTimestamp);
+        $time = date('H:i', $timestamp);
 
-        return sprintf('%02d:%02d', $hour, $minute);
-    }
-
-    private function generateVenue()
-    {
-        // Generate a random venue for the exam
-        $venues = ['Room A', 'Room B', 'Room C', 'Room D'];
-        $venue = $venues[array_rand($venues)];
-
-        return $venue;
+        return $time;
     }
 }
