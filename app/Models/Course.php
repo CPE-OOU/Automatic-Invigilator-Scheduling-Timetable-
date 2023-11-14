@@ -14,6 +14,7 @@ class Course extends Model
         'code',
         'credit_hours',
         'lecturers',
+        'lecturer', 
     ];
 
     public function lecturers()
