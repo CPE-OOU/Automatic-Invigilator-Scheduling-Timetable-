@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/portraitlogo.png') }}">
-    <title>Fiishers | Admin</title>
+    <title>Invig | Dashboard</title>
 
     <!-- Preload and Lazy Load Stylesheets -->
     <link rel="preload" href="{{ asset('temp/assets/css/soft-ui-dashboard.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'" />

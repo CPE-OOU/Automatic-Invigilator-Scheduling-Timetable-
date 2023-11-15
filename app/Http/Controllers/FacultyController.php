@@ -15,10 +15,9 @@ class FacultyController extends Controller
         return view('user.timetable');
     }
 
-    public function generateTimetable(Request $request)
+    public function GenerateTimetable(Request $request)
     {
         $request->validate([
-<<<<<<< HEAD
             'start' => 'required|date',
             'end' => 'required|date|after:start',
             'venues' => 'required|array',
@@ -26,21 +25,6 @@ class FacultyController extends Controller
             'timestart' => 'required|date_format:H:i',
             'timeend' => 'required|date_format:H:i|after:timestart',
         ]);
-=======
-        'start' => 'required|date',
-        'end' => 'required|date|after:start',
-        'venues' => 'required|array',
-        'venues.*' => 'required|string',
-        'timestart' => 'required|date_format:H:i',
-        'timeend' => 'required|date_format:H:i|after:timestart',
-    ]);
-
-        // Get the selected deadline for exams
-        $startDate = $request->input('start');
-        $endDate = $request->input('end');
-        $venues = $request->input('venues');
-        $deadline = $endDate; // Use the end date as the deadline
->>>>>>> 278825921a3f06e7720e851945cf2eaccf992ec6
 
         // Get the selected deadline for exams
         $startDate = $request->input('start');
@@ -54,16 +38,15 @@ class FacultyController extends Controller
         // Fetch all courses related to the authenticated user
         $courses = Course::where('user_id', $user->id)->get();
 
-        // Initialize an empty timetable array
+        // Generate the timetable data
         $timetable = [];
 
-        // Iterate through each course
         foreach ($courses as $course) {
             // Fetch the two attached lecturers for the course
             $lecturers = $course->lecturers()->take(2)->get();
 
             // Fetch a random third lecturer from other users
-            $thirdLecturer = User::whereNotNull('invigilator_id')
+            $thirdLecturer = User::whereNotNull('lecturers')
                 ->whereNotIn('id', $lecturers->pluck('id'))
                 ->inRandomOrder()
                 ->first();
@@ -81,7 +64,7 @@ class FacultyController extends Controller
             $venue = $request->input('venue');
 
             // Create a timetable entry for the course
-            $timetable[] = [
+            $timetableItem = [
                 'time' => $examTime,
                 'course_name' => $course->name,
                 'course_code' => $course->code,
@@ -89,21 +72,23 @@ class FacultyController extends Controller
                 'venue' => $venue,
                 'date' => $examDate,
             ];
+
+            $timetable[] = $timetableItem;
         }
 
-        // Generate the PDF timetable
-        $pdf = PDF::loadView('timetable', compact('timetable'));
+        // Store the timetable data in the session
+        session(['timetable' => $timetable]);
+        
+        // Redirect to the timetable preview page
+        return redirect('timetable-preview')->withInput();
+    }
 
-<<<<<<< HEAD
-        // Send the PDF as a download
-        return $pdf->download('timetable.pdf');
-=======
-        // Save the PDF to a file
-        $pdf->save('timetable.pdf');
+    public function timetablePreview()
+    {
+        // Retrieve the timetable data from the session
+        $timetable = session('timetable');
 
-        // Return a response indicating success
-        return redirect("dashboard")->withSuccess('Timetable generated successfully');
->>>>>>> 278825921a3f06e7720e851945cf2eaccf992ec6
+        return view('user.timetable-preview', compact('timetable'));
     }
 
     private function generateExamDate($startDate, $endDate)
@@ -136,8 +121,4 @@ class FacultyController extends Controller
 
         return $time;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 278825921a3f06e7720e851945cf2eaccf992ec6

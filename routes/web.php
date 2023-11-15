@@ -26,8 +26,7 @@ use Laravel\Fortify\Http\Controllers\NewPasswordController;
 
 require __DIR__ . '/home.php';
 require __DIR__ . '/admin.php';
-// require __DIR__ . '/user.php';
-// require __DIR__ . '/botman.php';
+
 
 
 
@@ -73,5 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
-
 Route::post('/generate-timetable', [FacultyController::class, 'generateTimetable'])->name('generate.timetable');
+
+Route::post('/courses', [CourseController::class, 'save'])->name('courses.save');
+Route::get('/timetable-preview', [FacultyController::class, 'timetablePreview'])->name('timetable-preview');

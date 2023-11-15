@@ -39,9 +39,7 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Email
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Status
-                                        </th>
+                                        
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Creation Date
                                         </th>
@@ -63,20 +61,18 @@
                                         <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">{{ $lecturer->email }}</p>
                                         </td>
+                                        
                                         <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">{{ $lecturer->status }}</p>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $lecturer->created_at->format('d/m/y') }}</span>
                                         </td>
                                         <td class="text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ $user->created_at->format('d/m/y') }}</span>
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="{{ route('lecturers.edit', $lecturer->id) }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit user">
+                                            {{-- <a href="{{ route('lecturers.edit', $lecturer->id) }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit user">
                                                 <i class="fas fa-user-edit text-secondary"></i>
-                                            </a>
+                                            </a> --}}
                                             {{-- <a href="#" class="mx-3" data-bs-toggle="modal" data-bs-target="#deleteUserModal" data-user-id="{{ $user->id }}" data-bs-original-title="Delete user">
                                                 <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                             </a> --}}
-                                            <form action="{{ route('lecturers.delete', $lecturer->id) }}" method="POST" style="display: inline">
+                                            <form action="{{ route('lecturers.destroy', $lecturer->id) }}" method="POST" style="display: inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
@@ -108,7 +104,7 @@
                 <h5 class="modal-title" id="addUserModalLabel">Add New Lecturer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="addUserForm" method="PUT" action="{{ route('lecturers.store') }}">
+            <form id="addUserForm" method="POST" action="{{ route('lecturers.index') }}">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">

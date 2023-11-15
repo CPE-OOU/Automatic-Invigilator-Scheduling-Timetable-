@@ -40,9 +40,7 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Course Code
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Status
-                                        </th>
+                                        
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Creation Date
                                         </th>
@@ -57,31 +55,25 @@
                                         <td class="ps-4">
                                             <p class="text-xs font-weight-bold mb-0">{{ $course->id }}</p>
                                         </td>
-                                        <td>
-                                            <div>
-                                                <img src="{{ asset('storage/' . $course->photo) }}" class="avatar avatar-sm me-3">
-                                            </div>
-                                        </td>
+                                       
                                         <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">{{ $course->name }}</p>
                                         </td>
                                         <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">{{ $course->code }}</p>
                                         </td>
+                                        
                                         <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">{{ $course->status }}</p>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $course->created_at->format('d/m/y') }}</span>
                                         </td>
                                         <td class="text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ $user->created_at->format('d/m/y') }}</span>
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="{{ route('course.edit', $course->id) }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit user">
+                                            <a href="{{ route('courses.edit', $course->id) }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit user">
                                                 <i class="fas fa-user-edit text-secondary"></i>
                                             </a>
                                             {{-- <a href="#" class="mx-3" data-bs-toggle="modal" data-bs-target="#deleteUserModal" data-user-id="{{ $user->id }}" data-bs-original-title="Delete user">
                                                 <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                             </a> --}}
-                                            <form action="{{ route('courses.delete', $course->id) }}" method="POST" style="display: inline">
+                                            <form action="{{ route('courses.destroy', $course->id) }}" method="POST" style="display: inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
@@ -99,7 +91,7 @@
             </div>
         </div>
     </div>
-
+  
 <!-- Add User Modal -->
 <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -113,35 +105,47 @@
                 <h5 class="modal-title" id="addUserModalLabel">Add New Course</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-             <form id="addUserForm" method="PUT" action="{{ route('courses.store') }}">
-            @csrf
-            <div class="modal-body">
+            <form id="addUserForm" method="POST" action="{{ route('courses.save') }}">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" required>
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+            
+                    <div class="mb-3">
+                        <label for="code" class="form-label">Course Code</label>
+                        <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code" required>
+                        @error('code')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+            
+                    <div class="mb-3">
+                        <label for="credit_hours" class="form-label">Credit Hours</label>
+                        <input type="number" class="form-control" id="credit_hours" name="credit_hours">
+                    </div>
+            
+                    
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="code" class="form-label">Course Code</label>
-                    <input type="text" class="form-control" id="code" name="code" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="credit_hours" class="form-label">Credit Hours</label>
-                    <input type="number" class="form-control" id="credit_hours" name="credit_hours">
-                </div>
-
-                <div class="mb-3">
-                    <label for="course_lecturer" class="form-label">Course Lecturers (seperated by comma)</label>
-                    <input type="text" class="form-control" id="course_lecturer" name="course_lecturer" data-role="tagsinput">
-                </div>
+                    <label for="lecturers" class="form-label">Course Lecturers</label>
+                    <textarea class="form-control" id="lecturers" name="lecturers" rows="3" placeholder="Enter the lecturer names separated by comma"  required></textarea>
+                    @error('lecturers')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Add Course</button>
-            </div>
-        </form>
+                
+                </div>
+            
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add Course</button>
+                </div>
+            </form>
+            
     </div>
     </div>
 </div>
@@ -152,7 +156,7 @@
 <script>
     // Initialize Bootstrap Tags Input
     $(document).ready(function () {
-        $('#course_lecturer').tagsinput({
+        $('#lecturers').tagsinput({
             trimValue: true,
             confirmKeys: [13, 44], // Enter and comma keys
         });

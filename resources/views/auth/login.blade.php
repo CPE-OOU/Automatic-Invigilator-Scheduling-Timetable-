@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('content')
+{{-- @section('content')
 <section class="fxt-template-animation fxt-template-layout34" data-bg-image="{{ asset('img/elements/bg1.png') }}">
     <div class="fxt-shape  d-none d-md-block">
         <div class="fxt-transformX-L-50 fxt-transition-delay-1">
@@ -83,4 +83,76 @@
         </div>
     </div>
 </section>
-@endsection
+@endsection --}}
+@if(session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
+
+
+<div class="forny-container">
+        
+    <div class="forny-inner">
+        <div class="forny-form">
+            <div class="mb-8 text-center forny-logo">
+                <img src="{{ asset('images/logo.png') }}">
+            </div>
+            <div class="text-center">
+                <h4>Login into account</h4>
+                <p class="mb-10">Use your credentials to access your account.</p>
+            </div>
+            
+            <form method="POST" action="{{ route('login.post') }}">
+                @csrf
+                    <div class="form-group">
+                    <input type="department" id="email" class="form-control" name="department" placeholder="Enter Department" required>
+                    @error('department')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                    </div>
+                    <div class="form-group">
+                    <input type="email" id="email" class="form-control" name="email" placeholder="Enter Email" required>
+                    @error('email')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                    </div>
+                    <div class="form-group">
+                    <input id="password" type="password" class="form-control" name="password" placeholder="********" required>
+                    <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
+                    @error('password')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="cb1">
+                        <label class="custom-control-label" for="cb1">Remember me
+                        </label>
+                    </div>
+                
+                    <div class="form-group">
+                    <div class="fxt-switcher-description2 text-right">
+                    <a href="{{ route('password.request') }}" class="fxt-switcher-text">Recover Password</a>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <button class="btn btn-primary btn-block">Login</button>
+                        </div>
+                    </div>
+                    </form>
+            
+                        
+        
+                    <div class="text-center mt-10">
+                        Don't have an account? <a href="{{ route('register') }}">Register here</a>
+                    </div>  
+                
+    
+    
+        </div>
+    </div>
+    
+        </div>
+    
+       
