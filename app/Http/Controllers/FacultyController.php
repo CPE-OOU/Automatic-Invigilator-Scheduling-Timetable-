@@ -18,6 +18,7 @@ class FacultyController extends Controller
     public function generateTimetable(Request $request)
     {
         $request->validate([
+<<<<<<< HEAD
             'start' => 'required|date',
             'end' => 'required|date|after:start',
             'venues' => 'required|array',
@@ -25,6 +26,21 @@ class FacultyController extends Controller
             'timestart' => 'required|date_format:H:i',
             'timeend' => 'required|date_format:H:i|after:timestart',
         ]);
+=======
+        'start' => 'required|date',
+        'end' => 'required|date|after:start',
+        'venues' => 'required|array',
+        'venues.*' => 'required|string',
+        'timestart' => 'required|date_format:H:i',
+        'timeend' => 'required|date_format:H:i|after:timestart',
+    ]);
+
+        // Get the selected deadline for exams
+        $startDate = $request->input('start');
+        $endDate = $request->input('end');
+        $venues = $request->input('venues');
+        $deadline = $endDate; // Use the end date as the deadline
+>>>>>>> 278825921a3f06e7720e851945cf2eaccf992ec6
 
         // Get the selected deadline for exams
         $startDate = $request->input('start');
@@ -78,8 +94,16 @@ class FacultyController extends Controller
         // Generate the PDF timetable
         $pdf = PDF::loadView('timetable', compact('timetable'));
 
+<<<<<<< HEAD
         // Send the PDF as a download
         return $pdf->download('timetable.pdf');
+=======
+        // Save the PDF to a file
+        $pdf->save('timetable.pdf');
+
+        // Return a response indicating success
+        return redirect("dashboard")->withSuccess('Timetable generated successfully');
+>>>>>>> 278825921a3f06e7720e851945cf2eaccf992ec6
     }
 
     private function generateExamDate($startDate, $endDate)
@@ -112,4 +136,8 @@ class FacultyController extends Controller
 
         return $time;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 278825921a3f06e7720e851945cf2eaccf992ec6

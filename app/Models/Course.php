@@ -13,8 +13,13 @@ class Course extends Model
         'name',
         'code',
         'credit_hours',
+<<<<<<< HEAD
         'user_id',
         'lecturers',
+=======
+        'lecturers',
+        'lecturer', 
+>>>>>>> 278825921a3f06e7720e851945cf2eaccf992ec6
     ];
 
     public function lecturers()

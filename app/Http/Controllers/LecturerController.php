@@ -122,7 +122,7 @@ class LecturerController extends Controller
      */
     public function destroy(Lecturer $lecturer)
 {
-    $user = Auth::user(); // Get the currently authenticated user
+    $user = Auth::user(); 
 
     // Check if the lecturer belongs to the currently authenticated user
     if ($lecturer->user_id !== $user->id) {

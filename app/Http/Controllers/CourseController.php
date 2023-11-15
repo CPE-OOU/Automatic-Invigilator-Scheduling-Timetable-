@@ -40,6 +40,7 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
 public function show(Course $course)
 {   $courses = Course::all();
     return view('user.courses', compact('course'));
@@ -78,6 +79,24 @@ public function save(Request $request)
 
 
 
+=======
+    public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required',
+        'code' => 'required|unique:courses',
+        'credit_hours' => 'nullable|numeric',
+        'lecturers' => ['required', 'array'], // Updated validation rule for lecturers
+    ]);
+
+    // Convert the lecturers array to JSON before storing
+    $request->merge(['lecturers' => json_encode($request->input('lecturers'))]);
+
+    Course::create($request->all());
+
+    return redirect()->route('courses.index')->with('success', 'Course created successfully.');
+}
+>>>>>>> 278825921a3f06e7720e851945cf2eaccf992ec6
 
     /**
      * Display the specified resource.

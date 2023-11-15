@@ -8,7 +8,8 @@
     </div>
     @endif
     @yield('content')
-     
+    <!-- Include Bootstrap Tags Input CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css"> 
 
     <div class="container-fluid py-4">
         <div class="row">
@@ -32,14 +33,12 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             ID
                                         </th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Photo
-                                        </th>
+                                        
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Name
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Email
+                                            Course Code
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Status
@@ -67,7 +66,7 @@
                                             <p class="text-xs font-weight-bold mb-0">{{ $course->name }}</p>
                                         </td>
                                         <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">{{ $course->email }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $course->code }}</p>
                                         </td>
                                         <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">{{ $course->status }}</p>
@@ -114,28 +113,51 @@
                 <h5 class="modal-title" id="addUserModalLabel">Add New Course</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="addUserForm" method="PUT" action="{{ route('courses.store') }}">
-                @csrf
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" >
-                    </div>
-                   
-                    
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add Cours</button>
+             <form id="addUserForm" method="PUT" action="{{ route('courses.store') }}">
+            @csrf
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
                 </div>
-            </form>
-        </div>
+
+                <div class="mb-3">
+                    <label for="code" class="form-label">Course Code</label>
+                    <input type="text" class="form-control" id="code" name="code" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="credit_hours" class="form-label">Credit Hours</label>
+                    <input type="number" class="form-control" id="credit_hours" name="credit_hours">
+                </div>
+
+                <div class="mb-3">
+                    <label for="course_lecturer" class="form-label">Course Lecturers (seperated by comma)</label>
+                    <input type="text" class="form-control" id="course_lecturer" name="course_lecturer" data-role="tagsinput">
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Course</button>
+            </div>
+        </form>
+    </div>
     </div>
 </div>
-
+ 
 
 </main>
+
+<script>
+    // Initialize Bootstrap Tags Input
+    $(document).ready(function () {
+        $('#course_lecturer').tagsinput({
+            trimValue: true,
+            confirmKeys: [13, 44], // Enter and comma keys
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+
