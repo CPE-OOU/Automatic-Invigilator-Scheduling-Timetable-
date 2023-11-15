@@ -15,6 +15,8 @@ class CreateLecturersTable extends Migration
     {
         Schema::create('lecturers', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id'); // Added user_id column
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Foreign key constraint
             $table->string('name');
             $table->string('email')->unique()->nullable();
             $table->string('phone')->nullable();

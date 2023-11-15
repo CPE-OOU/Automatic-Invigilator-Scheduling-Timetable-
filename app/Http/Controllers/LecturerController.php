@@ -15,6 +15,9 @@ class LecturerController extends Controller
      */
     public function index()
     {
+
+        $user = auth()->user(); // Get the authenticated user
+        $lecturers = Lecturer::where('user_id', $user->id)->get(); // Filter Lecturers based on user ID
         $lecturers = Lecturer::all();
 
         return view('user.lecturers', compact('lecturers'));
@@ -27,6 +30,8 @@ class LecturerController extends Controller
      */
     public function create()
     {
+        $user = auth()->user(); // Get the authenticated user
+        $lecturers = Lecturer::where('user_id', $user->id)->get(); // Filter Lecturers based on user ID
         $lecturers = Lecturer::all();
 
         return view('user.lecturers');
@@ -39,21 +44,21 @@ class LecturerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'nullable|email',
-        ]);
+{
+    $request->validate([
+        'name' => 'required',
+        'email' => 'nullable|email',
+    ]);
 
-        $user = Auth::user(); 
-        $lecturerData = $request->all();
-        $lecturerData['user_id'] = $user->id; 
+    $user = Auth::user(); // Get the authenticated user
+    $lecturerData = $request->all(); // Get all lecturer data
+    $lecturerData['user_id'] = $user->id; // Add user ID to lecturer data
 
-        Lecturer::create($lecturerData);
+    Lecturer::create($lecturerData); // Create new lecturer record in the database
 
-        return redirect()->route('lecturers.index')
-                        ->with('success','Lecturer created successfully.');
-    }
+    return redirect()->route('lecturers.index')
+        ->with('success', 'Lecturer created successfully.');
+}
 
     /**
      * Display the specified resource.
@@ -63,6 +68,8 @@ class LecturerController extends Controller
      */
     public function show(Lecturer $lecturer)
     {
+        $user = auth()->user(); // Get the authenticated user
+        $lecturers = Lecturer::where('user_id', $user->id)->get(); // Filter Lecturers based on user ID
            
         // Check if the lecturer belongs to the currently authenticated user
         if ($lecturer->user_id !== $user->id) {
@@ -81,7 +88,8 @@ class LecturerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Lecturer $lecturer)
-    {
+    {$user = auth()->user(); // Get the authenticated user
+        $lecturers = Lecturer::where('user_id', $user->id)->get();
         return view('lecturers.edit', compact('lecturer'));
     }
 

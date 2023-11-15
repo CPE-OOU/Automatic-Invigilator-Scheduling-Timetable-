@@ -13,6 +13,8 @@ class CreateFacultiesTable extends Migration
     {
         Schema::create('faculties', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id'); // Added user_id column
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Foreign key constraint
             $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();
