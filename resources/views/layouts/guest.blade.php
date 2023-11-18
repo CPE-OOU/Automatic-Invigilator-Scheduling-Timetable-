@@ -43,6 +43,18 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('temp/assets/css/soft-ui-dashboard.css') }}" rel="stylesheet" />
     @show
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(function(registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch(function(error) {
+                    console.error('Service Worker registration failed:', error);
+                });
+        }
+    </script>
 </head>
 <body class="g-sidenav-show bg-gray-100">
 @auth
