@@ -68,10 +68,9 @@ class FacultyController extends Controller
    
  
 
-
     foreach ($courses as $course) {
         // Decode the JSON array in the lecturers column
-        // $randomVenue = $validatedData['venues'][array_rand($validatedData['venues'])];
+        
         $randomVenueArray = $validatedData['venues'][array_rand($validatedData['venues'])];
         $randomVenue = explode(',', $randomVenueArray)[array_rand(explode(',', $randomVenueArray))];
         $courseLecturers = json_decode($course->lecturers, true);
@@ -116,9 +115,7 @@ class FacultyController extends Controller
         'venue' => $randomVenue,
         'date' => $examDate,
     ];
-    // dd($randomVenue);
-
-// dd($timetableItem);
+   
     // Add the timetable item to the array
     $timetable[] = $timetableItem;
 }
