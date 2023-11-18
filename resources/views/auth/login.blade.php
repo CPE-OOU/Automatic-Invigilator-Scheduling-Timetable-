@@ -102,7 +102,9 @@
                 <h4>Login into account</h4>
                 <p class="mb-10">Use your credentials to access your account.</p>
             </div>
-            
+            <div class="col-lg-4">
+                <div class="fxt-column-wrap justify-content-center">
+                    <div class="fxt-form">
             <form method="POST" action="{{ route('login.post') }}">
                 @csrf
                     <div class="form-group">
@@ -141,7 +143,9 @@
                         </div>
                     </div>
                     </form>
-            
+                    </div>
+                </div>
+            </div>
                         
         
                     <div class="text-center mt-10">

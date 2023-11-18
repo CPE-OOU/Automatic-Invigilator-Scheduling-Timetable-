@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-//cron url
-Route::get('/cron', [AutoTaskController::class, 'autotopup'])->name('cron');
+
 //Front Pages Route
 Route::get('/', [HomePageController::class, 'index'])->name('home');
 Route::get('terms', [HomePageController::class, 'terms'])->name('terms');

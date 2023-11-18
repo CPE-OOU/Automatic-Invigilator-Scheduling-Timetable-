@@ -70,4 +70,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Lecturer::class, 'invigilator_id');
     }
+    public function courses() {
+        return $this->hasMany(Course::class);
+      }
+      
 }

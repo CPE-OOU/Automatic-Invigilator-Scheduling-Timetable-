@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Settings;
+use App\Models\Course;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\CourseController;
@@ -25,7 +26,7 @@ use Laravel\Fortify\Http\Controllers\NewPasswordController;
 */
 
 require __DIR__ . '/home.php';
-require __DIR__ . '/admin.php';
+// require __DIR__ . '/admin.php';
 
 
 
@@ -33,15 +34,26 @@ require __DIR__ . '/admin.php';
 // Auth::routes();
 
 
-
 Route::middleware(['auth'])->group(function () {
-    Route::get('/generate-timetable', [FacultyController::class, 'generateTimetable'])->name('generate.timetable');
+  Route::post('/generatetimetable', [FacultyController::class, 'generateTimetable'])->name('generate.timetable');
+
+  // Route::post('/generate', [FacultyController::class, 'GenerateTimetable'])->name('build');
+  Route::get('/generate-timetable', [FacultyController::class, 'generateTimetable'])->name('timetable.generate');
+Route::get('/timetable-preview/{filename}', [FacultyController::class, 'timetablePreview'])->name('timetable.preview');
+
+Route::get('/timetable-download', [FacultyController::class, 'downloadTimetable'])->name('timetable.download');
+
+Route::get('/timetable-preview', [FacultyController::class, 'timetablePreview'])->name('timetable.preview');
 });
 
 Route::get('/timetable-generated', function () {
   return view('timetable-generated');
 })->name('timetable.generated');
 
+Route::get('/test', function(){
+  $course = Course::find(1);
+  dd($course->lecturers);
+  });
 
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.post');
@@ -72,7 +84,5 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
-Route::post('/generate-timetable', [FacultyController::class, 'generateTimetable'])->name('generate.timetable');
 
 Route::post('/courses', [CourseController::class, 'save'])->name('courses.save');
-Route::get('/timetable-preview', [FacultyController::class, 'timetablePreview'])->name('timetable-preview');

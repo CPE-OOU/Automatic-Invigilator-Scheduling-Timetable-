@@ -1,0 +1,20 @@
+{
+    "nucleoicons": {
+        "normal": "nucleoicons_normal_a0d8a2a36ab39ef3afd2abec33d43e4d"
+    },
+    "inter": {
+        "normal": "C:\\xampp\\htdocs\\dashboard\\Invigilation_Scheduling_timetable-main\\Invigilation_Scheduling_timetable-main\\storage\\fonts\/inter_normal_3ba32a48b7860dfb008d0b1457da683a",
+        "500": "C:\\xampp\\htdocs\\dashboard\\Invigilation_Scheduling_timetable-main\\Invigilation_Scheduling_timetable-main\\storage\\fonts\/inter_500_5227956572435006df168ae4e07c5148",
+        "600": "C:\\xampp\\htdocs\\dashboard\\Invigilation_Scheduling_timetable-main\\Invigilation_Scheduling_timetable-main\\storage\\fonts\/inter_600_d0d96b12edf8a78fd85c552d12762fb0",
+        "bold": "inter_bold_868976cd8a549429e4b1d38e6b1b6bed"
+    },
+    "unicons-line": {
+        "normal": "unicons_line_normal_83e8e74fbdfb12f231a1044ee5d3c294"
+    },
+    "open sans": {
+        "300": "C:\\xampp\\htdocs\\dashboard\\Invigilation_Scheduling_timetable-main\\Invigilation_Scheduling_timetable-main\\storage\\fonts\/open_sans_300_38aaef3a6f81e0869aefd29fb43eb15a",
+        "normal": "C:\\xampp\\htdocs\\dashboard\\Invigilation_Scheduling_timetable-main\\Invigilation_Scheduling_timetable-main\\storage\\fonts\/open_sans_normal_d26ccb22614ae36546477dab90017d0e",
+        "600": "C:\\xampp\\htdocs\\dashboard\\Invigilation_Scheduling_timetable-main\\Invigilation_Scheduling_timetable-main\\storage\\fonts\/open_sans_600_624d6e61f7711aa5830c80aa3bba1264",
+        "bold": "open_sans_bold_4238b33012be0cc2f17eea1b2179dc6e"
+    }
+}
