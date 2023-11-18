@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/portraitlogo.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
     <title>Invig | Dashboard</title>
 
     <!-- Preload and Lazy Load Stylesheets -->
@@ -52,9 +52,6 @@
 @yield('guest')
 @endguest
 
-<div id="preloader">
-    <div id="loader"></div>
-</div>
 
 @if(session()->has('success'))
 <div x-data="{ show: true}"
@@ -64,7 +61,7 @@
     <p class="m-0">{{ session('success') }}</p>
 </div>
 @endif
-{{-- <script src="{{ asset('/js/app.js') }}"></script> --}}
+
 <script src="{{ asset('/js/toastr.min.js') }}"></script>
 <script>
     @if(Session::has('success'))

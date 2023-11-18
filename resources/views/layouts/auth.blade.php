@@ -6,15 +6,15 @@
     <title>Invig | Invigilation Scheduling Software</title>
     <meta name="description" content="">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
 
      @section('styles')
      <link href="css/common.css" rel="stylesheet">
-     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
-<link href="css/theme-03.css" rel="stylesheet">
+     
+     <link href="css/theme-03.css" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="{{ asset('temp/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="{{ asset('sign/css/fontawesome-all.min.css') }}">
     <!-- Flaticon CSS -->
@@ -32,14 +32,6 @@
         @yield('content')
     </div>
     
-    <!-- Uncomment the preloader section if needed -->
-    <!-- <div id="preloader" class="preloader">
-        <div class='inner'>
-            <div class='line1'></div>
-            <div class='line2'></div>
-            <div class='line3'></div>
-        </div>
-    </div> -->
 
     <script src="{{ asset('sign/js/jquery.min.js') }}"></script>
     <!-- Bootstrap js -->
