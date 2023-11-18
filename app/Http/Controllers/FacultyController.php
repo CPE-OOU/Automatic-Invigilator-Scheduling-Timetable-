@@ -179,22 +179,20 @@ private function generateExamDate($startDate, $endDate)
     // Return the formatted date
     return $randomDate->format('Y-m-d');
 }
-private function generateExamTime($startTime, $endTime, $maxEndTime)
+private function generateExamTime($startTime, $endTime)
 {
     $startTimestamp = strtotime($startTime);
     $endTimestamp = strtotime($endTime);
 
-    // Ensure that the maxEndTime is not later than the specified end time
-    $maxEndTimestamp = min(strtotime($maxEndTime), $endTimestamp);
-
-    // Generate a random timestamp between the start and maximum end time
-    $randomTimestamp = mt_rand($startTimestamp, $maxEndTimestamp);
+    // Generate a random timestamp between the start and end time
+    $randomTimestamp = mt_rand($startTimestamp, $endTimestamp);
 
     // Format the random timestamp as desired
     $randomTime = date('g:i A', $randomTimestamp);
 
     // Generate the end time by adding 3 hours to the random timestamp
-    $endTime = date('g:i A', strtotime('+3 hours', $randomTimestamp));
+    $endTime = min(strtotime('+3 hours', $randomTimestamp), $endTimestamp);
+    $endTime = date('g:i A', $endTime);
 
     // Format the time range
     $timeRange = $randomTime . ' - ' . $endTime;
