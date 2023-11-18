@@ -4,9 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Invig | Invigilation Scheduling Software</title>
-    <meta name="description" content="">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
+    <meta name="Invig" content="invig" />
+
+   <!-- Favicon -->
+   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
+   <link rel="shortcut icon" type="image/png" href="{{ asset('images/logo.png') }}">
 
      @section('styles')
      <link href="css/common.css" rel="stylesheet">

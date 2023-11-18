@@ -8,6 +8,10 @@
 
     <title>Invig | Invigilation Scheduling Software</title>
 
+     <!-- Favicon -->
+     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
+     <link rel="shortcut icon" type="image/png" href="{{ asset('images/logo.png') }}">
+
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('public/plugins/bootstrap/bootstrap.min.css') }}">
     <!-- themefy-icon -->
@@ -21,13 +25,10 @@
     <!-- Main Stylesheet -->
     <link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}" type="image/x-icon">
-    <link rel="icon" href="{{ asset('public/images/favicon.ico') }}" type="image/x-icon">
+   
 </head>
 
 <body>
-    <!-- Add your navigation bar or header here -->
     
     <div class="">
         @yield('content')
