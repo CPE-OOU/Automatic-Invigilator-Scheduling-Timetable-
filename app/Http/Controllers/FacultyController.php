@@ -95,7 +95,7 @@ class FacultyController extends Controller
 
     // Fetch a random lecturer from the available pool
     $randomLecturerName = $availableLecturers[array_rand($availableLecturers)];
-
+    
 
         // Generate exam date within the selected deadline
         $examDate = $this->generateExamDate($startDate, $endDate);
@@ -174,28 +174,29 @@ private function generateExamDate($startDate, $endDate)
     }
 
     // Return the formatted date
-    return $randomDate->format('Y-m-d');
+    return $randomDate->format('d-m-Y');
 }
 private function generateExamTime($startTime, $endTime)
 {
     $startTimestamp = strtotime($startTime);
     $endTimestamp = strtotime($endTime);
 
-    // Generate a random timestamp between the start and end time
+    // Ensure the random timestamp is within the start and end time range
     $randomTimestamp = mt_rand($startTimestamp, $endTimestamp);
 
-    // Format the random timestamp as desired
-    $randomTime = date('g:i A', $randomTimestamp);
-
-    // Generate the end time by adding 3 hours to the random timestamp
+    // Calculate the end time exactly 3 hours after the random timestamp
     $endTime = min(strtotime('+3 hours', $randomTimestamp), $endTimestamp);
-    $endTime = date('g:i A', $endTime);
+
+    // Format the random timestamp and end time
+    $randomTime = date('g:i A', $randomTimestamp);
+    $formattedEndTime = date('g:i A', $endTime);
 
     // Format the time range
-    $timeRange = $randomTime . ' - ' . $endTime;
+    $timeRange = $randomTime . ' - ' . $formattedEndTime;
 
     return $timeRange;
 }
+
 
     
     public function downloadTimetable()

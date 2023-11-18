@@ -8,7 +8,7 @@
     </div>
     @endif
     @yield('content')
-    <!-- Include Bootstrap Tags Input CSS -->
+   
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css"> 
 
     <div class="container-fluid py-4">
@@ -40,7 +40,9 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Course Code
                                         </th>
-                                        
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Lecturers
+                                        </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Creation Date
                                         </th>
@@ -61,6 +63,9 @@
                                         </td>
                                         <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">{{ $course->code }}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p class="text-xs font-weight-bold mb-0">{{ $course->lecturers }}</p>
                                         </td>
                                         
                                         <td class="text-center">

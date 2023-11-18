@@ -178,7 +178,7 @@ return array(
           *
           * @var string
           */
-        'default_paper_orientation' => "portrait",
+        'default_paper_orientation' => "landscape",
 
         /**
          * The default font family
@@ -189,7 +189,7 @@ return array(
         "default_font" => "serif",
 
         'font_path' => base_path('storage/fonts/'),
-        'defaultFont' => 'Courier',
+        
 
 
         /**
@@ -268,7 +268,7 @@ return array(
          *
          * @var bool
          */
-        "enable_remote" => true,
+        "enable_remote" => true, 
 
         /**
          * A ratio applied to the fonts height to be more like browsers' line height
