@@ -50,7 +50,7 @@ public function save(Request $request)
 {
     $request->validate([
         'name' => 'required',
-        'code' => 'required|unique:courses',
+        'code' => 'required',
         'credit_hours' => 'nullable|numeric',
         'lecturers' => 'required|string',
     ]);
