@@ -130,27 +130,6 @@ return view('user.timetable-preview', compact('timetable', 'filename'));
 }
 
 
-public function timetablePreview($filename)
-{
-    if (!auth()->check()) {
-        return redirect()->route('login');
-    }
-    // Retrieve timetable data from the session
-    $timetable = session('timetable');
-
-
-    // Set the full path for the PDF file
-    $filePath = public_path('storage/' . $filename);
-
-    // Check if the file exists
-    if (!file_exists($filePath)) {
-        abort(404);
-    }
-
-    return view('user.timetable-preview', compact('timetable', 'filename'));
-
-}
-
 private function generateExamDate($startDate, $endDate)
 {
     $startDateTime = new DateTime($startDate);
@@ -207,5 +186,29 @@ private function generateExamTime($startTime, $endTime)
         return PDF::loadView('user.timetable-preview', compact('timetable'))
             ->download('timetable_' . date('Y-m-d_H:i:s') . '.pdf');
     }
+
+    
+public function timetablePreview($filename)
+{
+    if (!auth()->check()) {
+        return redirect()->route('login');
+    }
+    // Retrieve timetable data from the session
+    $timetable = session('timetable');
+
+
+    // Set the full path for the PDF file
+    $filePath = public_path('storage/' . $filename);
+
+    // Check if the file exists
+    if (!file_exists($filePath)) {
+        abort(404);
+    }
+
+    return view('user.timetable-preview', compact('timetable', 'filename'));
+
+}
+
     
 }
+
