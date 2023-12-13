@@ -19,14 +19,7 @@
         </div>
         <form method="POST" action="{{ route('register.post') }}">
             @csrf
-            <label for="email">Department</label>
-            <div class="form-group">
-                <input type="text" id="department" class="form-control" name="department" placeholder="Department" required="required" value="">
-                @if ($errors->has('department'))
-                      <span class="text-danger">{{ $errors->first('department') }}</span>
-                  @endif
-            </div>
-            <label for="email">Faculty</label>
+           <label for="email">Faculty</label>
             <div class="form-group">
                 <input type="text" id="faculty" class="form-control" name="faculty" placeholder="Faculty" required="required" value="">
                  @if ($errors->has('faculty'))

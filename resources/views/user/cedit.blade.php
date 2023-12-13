@@ -19,8 +19,8 @@
                 <input type="hidden" name="_method" value="POST"> 
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $course->name}}" >
+                        <label for="name" class="form-label">Courae Title</label>
+                        <input type="textarea" class="form-control" id="name" name="name" value="{{ $course->name}}" >
                     </div>
     
                     <div class="mb-3"> 
@@ -28,9 +28,13 @@
                         <input type="text" class="form-control" id="code" name="code" value="{{ $course->code}}" >
                     </div>
     
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="credit_hours" class="form-label">Credit Hours</label>
                         <input type="number" class="form-control" id="credit_hours" name="credit_hours" value="{{ $course->credit_hours}}">
+                    </div> --}}
+                    <div class="mb-3">
+                        <label for="department" class="form-label">Department</label>
+                        <input type="text" class="form-control" id="department" name="department" value="{{ $course->department}}">
                     </div>
     
                     <div class="mb-3">

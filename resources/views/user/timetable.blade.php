@@ -48,7 +48,7 @@ class="form-group">
     @enderror
 </div>
 
-<div class="form-group">
+{{-- <div class="form-group">
     <label for="timestart">Select Exams Start Time:</label>
     <input type="time" name="timestart"  class="form-control @error('timestart') is-invalid @enderror" >
     @error('timestart')
@@ -62,7 +62,7 @@ class="form-group">
     @error('timeend')
         <div class="invalid-feedback">{{ $message }}</div>
     @enderror
-</div>
+</div> --}}
                         
                             <button type="submit" class="btn btn-primary">Generate Timetable</button>
                         </form>

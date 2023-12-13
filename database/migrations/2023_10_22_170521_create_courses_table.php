@@ -19,6 +19,7 @@ class CreateCoursesTable extends Migration
         $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Foreign key constraint
         $table->string('name');
         $table->string('code');
+        $table->string('department');
         $table->unsignedInteger('credit_hours')->nullable();
         $table->json('lecturers')->nullable(); // Changed to JSON type
         $table->timestamps();

@@ -59,19 +59,21 @@
                     <tr>
                         <th scope="col">Day</th>
                         <th scope="col">Time</th>
-                        <th scope="col">Course Title</th>
+                        <th scope="col">Dept</th>
+                        {{-- <th scope="col">Course Title</th> --}}
                         <th scope="col">Course Code</th>
                         <th scope="col">Invigilators</th>
                         <th scope="col">Venue</th>
                         <th scope="col">Date</th>
                     </tr>
-                </thead>
+                </thead> 
                 <tbody>
                     @foreach($timetable as $item)
                         <tr>
                             <td class="font-weight-bold">{{ $item['day'] }}</td>
                             <td>{{ $item['time'] }}</td>
-                            <td>{{ $item['course_name'] }}</td>
+                            <td>{{ $item['dept'] }}</td>
+                            {{-- <td>{{ $item['course_name'] }}</td> --}}
                             <td>{{ $item['course_code'] }}</td>
                             <td>{{ $item['invigilators'] }}</td>
                             <td>

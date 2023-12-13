@@ -65,7 +65,6 @@ class RegisterController extends Controller
      public function store(Request $request)
     {  
         $request->validate([
-            'department' => 'required|unique:users',
             'faculty' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
@@ -83,7 +82,6 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'department' => ['required', 'string', 'max:255', 'unique:users'],
             'faculty' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -95,7 +93,6 @@ class RegisterController extends Controller
     protected function create(array $data)
 {
     return User::create([
-        'department' => $data['department'],
         'faculty' => $data['faculty'],
         'email' => $data['email'],
         'password' => Hash::make($data['password']),

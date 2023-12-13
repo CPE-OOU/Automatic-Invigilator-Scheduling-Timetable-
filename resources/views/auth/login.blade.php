@@ -21,11 +21,11 @@
             
             <form method="POST" action="{{ route('login.post') }}">
                 @csrf
-                <label for="department">Department</label>
+                <label for="faculty">Faculty</label>
                 <div class="form-group">
                     
-                    <input type="text" id="department" class="form-control" name="department" placeholder="Enter Department" required>
-                    @error('department')
+                    <input type="text" id="faculty" class="form-control" name="faculty" placeholder="Enter faculty" required>
+                    @error('faculty')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>

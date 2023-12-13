@@ -34,14 +34,17 @@
                                             ID
                                         </th>
                                         
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Name
-                                        </th>
+                                        {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                           Course Title
+                                        </th> --}}
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Course Code
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Lecturers
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Dept
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Creation Date
@@ -58,14 +61,17 @@
                                             <p class="text-xs font-weight-bold mb-0">{{ $course->id }}</p>
                                         </td>
                                        
-                                        <td class="text-center">
+                                        {{-- <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">{{ $course->name }}</p>
-                                        </td>
+                                        </td> --}}
                                         <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">{{ $course->code }}</p>
                                         </td>
                                         <td class="text-center">
                                             <p class="text-xs font-weight-bold mb-0">{{ $course->lecturers }}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p class="text-xs font-weight-bold mb-0">{{ $course->department }}</p>
                                         </td>
                                         
                                         <td class="text-center">
@@ -114,8 +120,8 @@
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" required>
+                        <label for="name" class="form-label">Course Title</label>
+                        <input type="textarea" class="form-control @error('name') is-invalid @enderror" id="name" name="name" required>
                         @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -129,10 +135,10 @@
                         @enderror
                     </div>
             
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="credit_hours" class="form-label">Credit Hours</label>
                         <input type="number" class="form-control" id="credit_hours" name="credit_hours">
-                    </div>
+                    </div> --}}
             
                     
                 <div class="mb-3">
@@ -143,6 +149,22 @@
                 @enderror
             </div>
                 
+            <div class="mb-3">
+                <label for="department" class="form-label">Department</label>
+                <select class="form-select" id="department" name="department" required>
+                    <option value="" selected disabled>Select Department</option>
+                    <option value="Agric Eng">Agricultural Engineering</option>
+                    <option value="Civil Eng">Civil Engineering</option>
+                    <option value="Mech Eng">Mechanical Engineering</option>
+                    <option value="Comp Eng">Computer Engineering</option>
+                    <option value="Elect Elect">Electrical and Electronic Engineering</option>
+                </select>
+                @error('department')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            
+            
                 </div>
             
                 <div class="modal-footer">

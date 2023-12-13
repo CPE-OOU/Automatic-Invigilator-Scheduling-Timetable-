@@ -53,17 +53,19 @@ public function save(Request $request)
         'code' => 'required',
         'credit_hours' => 'nullable|numeric',
         'lecturers' => 'required|string',
+        'department' => 'required|string',
     ]);
     $user = auth()->user();
-    $lecturers = explode(",", $request->input('lecturers')); // Split lecturer names into an array
-    $lecturersJson = json_encode($lecturers); // Convert array to JSON string
+    $lecturers = explode(",", $request->input('lecturers'));
+    $lecturersJson = json_encode($lecturers); 
 
     $course = new Course();
     $course->user_id = $user->id;
     $course->name = $request->input('name');
     $course->code = $request->input('code');
     $course->credit_hours = $request->input('credit_hours');
-    $course->lecturers = $lecturersJson; // Save JSON string to 'lecturers' column
+    $course->department = $request->input('department');
+    $course->lecturers = $lecturersJson; 
 
     try {
         $course->save();
@@ -111,12 +113,13 @@ public function save(Request $request)
             'code' => 'nullable|unique:courses,code,'.$course->id,
             'credit_hours' => 'nullable|numeric',
             'lecturers' => 'nullable|array',
+            'department' => 'nullable|array',
         ]);
 
         $course->update($request->all());
-
+    
         return redirect()->route('courses.index')
-                        ->with('success','Course updated successfully.');
+                        ->with($course,'success','Course updated successfully.');
     }
 
     /**

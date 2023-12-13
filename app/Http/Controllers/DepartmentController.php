@@ -14,9 +14,10 @@ class DepartmentController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
         $departments = Department::all();
 
-        return view('departments.index', compact('departments'));
+        return view('user.departments', compact('departments'));
     }
 
     /**
@@ -39,9 +40,7 @@ class DepartmentController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'code' => 'required|unique:departments',
-            'hod_id' => 'required|exists:lecturers,id',
-        ]);
+      ]);
 
         Department::create($request->all());
 
@@ -57,7 +56,7 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-        return view('departments.show', compact('department'));
+        return view('user.departments', compact('department'));
     }
 
     /**
@@ -68,7 +67,7 @@ class DepartmentController extends Controller
      */
     public function edit(Department $department)
     {
-        return view('departments.edit', compact('department'));
+        return view('user.departments', compact('department'));
     }
 
     /**
@@ -82,8 +81,7 @@ class DepartmentController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'code' => 'required|unique:departments,code,'.$department->id,
-            'hod_id' => 'required|exists:lecturers,id',
+           
         ]);
 
         $department->update($request->all());
