@@ -43,99 +43,84 @@ class FacultyController extends Controller
         // Store validated form data in the session
         Session::put('validated_data', $request->all());
     
-        // Retrieve validated form data from the session
-        $validatedData = Session::get('validated_data');
-    
-        // Get the selected deadline for exams
-        $startDate = $validatedData['start'];
-        $endDate = $validatedData['end'];
-        $venues = $validatedData['venues'];
-        $deadline = $endDate; // Use the end date as the deadline
-    
-        // Get the authenticated user
-        $user = auth()->user();
-    
-        // Fetch all courses related to the authenticated user
-        $courses = Course::where('user_id', $user->id)->get();
-    
-        // Generate timetable data
-        $timetable = [];
-    
-        foreach ($courses as $currentCourse) {
-            // Decode the JSON array in the lecturers column
-            $randomVenueArray = $validatedData['venues'][array_rand($validatedData['venues'])];
-            $randomVenue = explode(',', $randomVenueArray)[array_rand(explode(',', $randomVenueArray))];
-            $currentCourseLecturers = json_decode($currentCourse->lecturers, true);
-        
-            // Fetch two lecturers from the current course's lecturers
-            $selectedLecturerNames = array_slice($currentCourseLecturers, 0, 2);
-        
-            $currentCourseDepartment = $course->department;
-             // Fetch one lecturer from another course related to another department
+         // Retrieve validated form data from the session
+    $validatedData = Session::get('validated_data');
+
+    // Get the selected deadline for exams
+    $startDate = $validatedData['start'];
+    $endDate = $validatedData['end'];
+    $venues = $validatedData['venues'];
+    $deadline = $endDate; // Use the end date as the deadline
+
+    // Get the authenticated user
+    $user = auth()->user();
+
+    // Fetch all courses related to the authenticated user
+    $courses = Course::where('user_id', $user->id)->get();
+
+    // Generate timetable data
+    $timetable = [];
+
+    // Generate exam date iteratively within the selected deadline
+    $examDates = $this->generateExamDatesIteratively($startDate, $endDate, count($courses));
+
+    // Iterate through the exam dates
+    foreach ($examDates as $index => $examDate) {
+        // Fetch one lecturer from another course related to another department
+        $currentCourse = $courses[$index];
+
         $otherDepartmentCourse = Course::where('user_id', '!=', $user->id)
-        ->where('department', '!=', $course->department)
-        ->whereNotNull('lecturers')
-        ->inRandomOrder()
-        ->first();
+            ->where('department', '!=', $currentCourse->department)
+            ->whereNotNull('lecturers')
+            ->inRandomOrder()
+            ->first();
 
-    $otherDepartmentLecturers = [];
+        $otherDepartmentLecturers = [];
 
-    if ($otherDepartmentCourse) {
-        $otherDepartmentLecturers = json_decode($otherDepartmentCourse->lecturers, true);
+        if ($otherDepartmentCourse) {
+            $otherDepartmentLecturers = json_decode($otherDepartmentCourse->lecturers, true);
 
-        if ($otherDepartmentLecturers) {
-            // Select a random lecturer from the fetched department
-            $randomLecturerName = $otherDepartmentLecturers[array_rand($otherDepartmentLecturers)];
-        } else {
-            $randomLecturerName = 'No available lecturers from other departments';
-        }
-    } else {
-        $randomLecturerName = 'No available lecturers from other departments';
-    }
-
-    // Debugging statements
-    dd([
-        'current_course_department' => $course->department,
-        'other_department_course' => $otherDepartmentCourse,
-        'other_department_lecturers' => $otherDepartmentLecturers,
-        'random_lecturer_name' => $randomLecturerName,
-    ]);
-        
-    
-            // Generate exam date iteratively within the selected deadline
-            $examDates = $this->generateExamDatesIteratively($startDate, $endDate, count($courses));
-    
-            // Generate exam time iteratively within the selected start time
-            $examTimes = $this->generateExamTimesIteratively(count($courses));
-    
-            // Check the day and allocate time slots accordingly
-            foreach ($courses as $index => $course) {
-                // Ensure the index is within the bounds of the date array
-                if (isset($examDates[$index]) && isset($examTimes[$index])) {
-                    // Create a timetable entry for the course
-                    $timetableItem = [
-                        'day' => date('l', strtotime($examDates[$index])),
-                        'date' => $examDates[$index],
-                        'dept' => $course->department,
-                        'course_name' => $course->name,
-                        'course_code' => $course->code,
-                        'venue' => $randomVenue,
-                    ];
-    
-                    // Allocate time slots based on the day of the week
-                    if ($this->isWeekday($timetableItem['day'])) {
-                        $timetableItem['time'] = $this->allocateWeekdayTimeSlot($examTimes[$index]);
-                    } elseif ($this->isFriday($timetableItem['day'])) {
-                        $timetableItem['time'] = $this->allocateFridayTimeSlot($examTimes[$index]);
-                    }
-    
-                    // Fetch invigilators and other details
-                    $timetableItem['invigilators'] = implode(', ', array_merge($selectedLecturerNames, [$randomLecturerName]));
-    
-                    // Add the timetable item to the array
-                    $timetable[] = $timetableItem;
-                }
+            if ($otherDepartmentLecturers) {
+                // Select a random lecturer from the fetched department
+                $randomLecturerName = $otherDepartmentLecturers[array_rand($otherDepartmentLecturers)];
+            } else {
+                $randomLecturerName = '';
             }
+        } else {
+            $randomLecturerName = '';
+        }
+
+        // Fetch two lecturers from the current course's lecturers
+        $currentCourseLecturers = json_decode($currentCourse->lecturers, true);
+        $selectedLecturerNames = array_slice($currentCourseLecturers, 0, 2);
+
+        // Decode the JSON array in the venues column
+        $randomVenueArray = $validatedData['venues'][array_rand($validatedData['venues'])];
+        $randomVenue = explode(',', $randomVenueArray)[array_rand(explode(',', $randomVenueArray))];
+
+        // Create a timetable entry for the course
+        $timetableItem = [
+            'day' => date('l', strtotime($examDate)),
+            'date' => $examDate,
+            'dept' => $currentCourse->department,
+            'course_name' => $currentCourse->name,
+            'course_code' => $currentCourse->code,
+            'venue' => $randomVenue,
+        ];
+
+        // Allocate time slots based on the day of the week
+        if ($this->isWeekday($timetableItem['day'])) {
+            $timetableItem['time'] = $this->allocateWeekdayTimeSlot($examDate);
+        } elseif ($this->isFriday($timetableItem['day'])) {
+            $timetableItem['time'] = $this->allocateFridayTimeSlot($examDate);
+        }
+
+        // Fetch invigilators and other details
+        $timetableItem['invigilators'] = implode(', ', array_merge($selectedLecturerNames, [$randomLecturerName]));
+
+        // Add the timetable item to the array
+        $timetable[] = $timetableItem;
+    
         }
     
         // Store timetable data in session
@@ -182,29 +167,30 @@ private function allocateFridayTimeSlot($startTime)
 }
 
     
-    private function generateExamDatesIteratively($startDate, $endDate, $numExams)
-    {
-        $examDates = [];
-        $currentDate = new DateTime($startDate);
-        $end = new DateTime($endDate);
-    
-        for ($i = 0; $i < $numExams; $i++) {
-            // Skip weekends (Saturday and Sunday)
-            while (in_array($currentDate->format('N'), [6, 7])) {
-                $currentDate->add(new DateInterval('P1D'));
-            }
-    
-            // Break if the current date exceeds the end date
-            if ($currentDate > $end) {
-                break;
-            }
-    
-            $examDates[] = $currentDate->format('Y-m-d');
-            $currentDate->add(new DateInterval("P1D")); // Add 1 day to the current date
+private function generateExamDatesIteratively($startDate, $endDate, $numExams)
+{
+    $examDates = [];
+    $currentDate = new DateTime($startDate);
+    $end = new DateTime($endDate);
+
+    for ($i = 0; $i < $numExams; $i++) {
+        // Skip weekends (Saturday and Sunday)
+        while (in_array($currentDate->format('N'), [6, 7])) {
+            $currentDate->add(new DateInterval('P1D'));
         }
-    
-        return $examDates;
+
+        // Break if the current date exceeds the end date
+        if ($currentDate > $end) {
+            break;
+        }
+
+        $examDates[] = $currentDate->format('d-m-Y');
+        $currentDate->add(new DateInterval("P1D")); // Add 1 day to the current date
     }
+
+    return $examDates;
+}
+
     
     private function isWeekday($day)
     {
@@ -228,64 +214,6 @@ private function allocateFridayTimeSlot($startTime)
             ->download('timetable_' . date('Y-m-d_H:i:s') . '.pdf');
     }
 
-<<<<<<< Updated upstream
-private function generateExamDate($startDate, $endDate)
-{
-    $startDateTime = new DateTime($startDate);
-    $endDateTime = new DateTime($endDate);
-
-    // Calculate the difference between start and end dates
-    $dateDifference = $startDateTime->diff($endDateTime);
-
-    // Calculate the total number of days in the date range
-    $totalDays = $dateDifference->days;
-
-    // Generate a random number of days within the date range
-    $randomDays = mt_rand(0, $totalDays);
-
-    // Add the random number of days to the start date
-    $randomDate = $startDateTime->add(new DateInterval("P{$randomDays}D"));
-
-    // Ensure the generated date falls on a weekday (Monday to Friday)
-    while ($randomDate->format('N') >= 6) {
-        $randomDate->add(new DateInterval("P1D"));
-    }
-
-    // Return the formatted date
-    return $randomDate->format('d-m-Y');
-}
-private function generateExamTime($startTime, $endTime)
-{
-    $startTimestamp = strtotime($startTime);
-    $endTimestamp = strtotime($endTime);
-
-    // Ensure the random timestamp is within the start and end time range
-    $randomTimestamp = mt_rand($startTimestamp, $endTimestamp);
-
-    // Calculate the end time exactly 3 hours after the random timestamp
-    $endTime = min(strtotime('+3 hours', $randomTimestamp), $endTimestamp);
-
-    // Format the random timestamp and end time
-    $randomTime = date('g:i A', $randomTimestamp);
-    $formattedEndTime = date('g:i A', $endTime);
-
-    // Format the time range
-    $timeRange = $randomTime . ' - ' . $formattedEndTime;
-
-    return $timeRange;
-}
-
-
-    
-    public function downloadTimetable()
-    {
-        $timetable = Session::get('timetable');
-    
-        // Generate the PDF and download it
-        return PDF::loadView('user.timetable-preview', compact('timetable'))
-            ->download('timetable_' . date('Y-m-d_H:i:s') . '.pdf');
-    }
-
     
 public function timetablePreview($filename)
 {
@@ -311,30 +239,3 @@ public function timetablePreview($filename)
     
 }
 
-=======
-    
-public function timetablePreview($filename)
-{
-    if (!auth()->check()) {
-        return redirect()->route('login');
-    }
-    // Retrieve timetable data from the session
-    $timetable = session('timetable');
-
-
-    // Set the full path for the PDF file
-    $filePath = public_path('storage/' . $filename);
-
-    // Check if the file exists
-    if (!file_exists($filePath)) {
-        abort(404);
-    }
-
-    return view('user.timetable-preview', compact('timetable', 'filename'));
-
-}
-
-    
-}
-
->>>>>>> Stashed changes
